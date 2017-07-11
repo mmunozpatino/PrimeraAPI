@@ -3,7 +3,7 @@ var Pet = require('../models/pet');
 
 //POSTNEW
 exports.addNew = function(req, res){
-   console.log('NEW');
+   console.log('NEW PET');
    var pet = new Pet({
       name: req.body.name,
       raza: req.body.raza,

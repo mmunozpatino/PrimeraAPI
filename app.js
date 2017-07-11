@@ -14,10 +14,12 @@ app.get('/',function(req, res){
 });
 
 var petCtrl = require('./controllers/petController');
-
-app.route('/')
+var ownerCtrl = require('./controllers/ownerController');
+app.route('/pet')
    .post(petCtrl.addNew);
 
+app.route('/owner')
+   .post(ownerCtrl.addNew);
 //conexion a mongo
 mongoose.connect('mongodb://localhost/mascotas', function(err, res){
    if(err) console.log('no conecto a mongo');
