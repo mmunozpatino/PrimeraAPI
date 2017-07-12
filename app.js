@@ -16,7 +16,13 @@ app.get('/',function(req, res){
 var petCtrl = require('./controllers/petController');
 var ownerCtrl = require('./controllers/ownerController');
 app.route('/pet')
-   .post(petCtrl.addNew);
+   .post(petCtrl.addNew)
+   .get(petCtrl.getAll);
+
+app.route('/pet/:id')
+   .get(petCtrl.getById)
+   .put(petCtrl.update)
+   .delete(petCtrl.delete);
 
 app.route('/owner')
    .post(ownerCtrl.addNew);
