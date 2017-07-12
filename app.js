@@ -27,7 +27,8 @@ app.route('/pet/:id')
 app.route('/owner')
    .post(ownerCtrl.addNew);
 //conexion a mongo
-mongoose.connect('mongodb://localhost/mascotas', function(err, res){
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/mascotas', { useMongoClient: true }, function(err, res){
    if(err) console.log('no conecto a mongo');
    console.log('conecto');
 })
