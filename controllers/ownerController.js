@@ -55,6 +55,30 @@ exports.addPet = function(req,res){
    });
 }
 
+//DELETE PET
+exports.deletePet = function(req,res){
+   console.log('Borrar mascota de dueño');
+   Owner.findById(req.params.ido, function(err, owner){
+      if(err){
+         console.log('error buscando dueño');
+      }else{
+         owner.mascotas.id(req.params.idp).remove();
+      }
+   })
+}
+
+//GET PETS
+exports.getPets = function(req, res){
+   console.log('GET PETS OF OWNER');
+   Owner.findById(req.params.id, function(err, owner){
+      if(err){
+         res.status(500, err.message);
+         console.log('error buscando owner para consultar mascotas');
+      }else{
+         res.status(200).jsonp(owner.mascotas);
+      }
+   })
+} 
 //UPDATE OWNER
 exports.update = function(req, res){
    console.log('Update owner');
