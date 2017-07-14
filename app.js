@@ -30,16 +30,15 @@ app.route('/owner')
 
 app.route('/owner/:id')
    .put(ownerCtrl.update)
-   .delete(ownerCtrl.delete);
+   .delete(ownerCtrl.delete)
+   .post(ownerCtrl.addPet);
 
 app.route('/pets/owner=:id/')
    .get(ownerCtrl.getPets);
 
-app.route('/owner/deletepet/:ido/:idp')
+app.route('/pets/owner=:ido/pet=:idp')
    .delete(ownerCtrl.deletePet);
 
-app.route('/owner.addpet/:id')
-   .post(ownerCtrl.addPet);
 //conexion a mongo
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/mascotas', { useMongoClient: true }, function(err, res){

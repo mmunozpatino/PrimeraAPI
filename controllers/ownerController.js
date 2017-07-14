@@ -62,10 +62,6 @@ exports.deletePet = function(req,res){
       if(err){
          console.log('error buscando dueño');
       }else{
-         /*
-         console.log(owner);
-         console.log(owner.mascotas.id(req.params.idp));
-         */
         owner.mascotas.id(req.params.idp).remove();
         owner.save(function(err){
          if(err){
