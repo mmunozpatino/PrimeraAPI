@@ -17,7 +17,7 @@ exports.addNew = function(req, res){
       }else { 
          console.log('todo ok');
          res.status(200).jsonp(owner);
-      }
+      };
    });
 }
 
@@ -30,14 +30,14 @@ exports.getAll = function(req, res){
          res.send(500, err.message);
       }else{
          res.status(200).jsonp(owners);
-      }
-   })
+      };
+   });
 }
 
 //ADD PET
 exports.addPet = function(req,res){
    console.log('ADD PET TO OWNER');
-   Owner.findOne({_id: req.params.id}, function(err, owner){
+   Owner.findById(req.params.id, function(err, owner){
       var pet = new Pet({
          name : req.body.name,
          raza: req.body.raza,
@@ -50,7 +50,44 @@ exports.addPet = function(req,res){
             res.status(500, err.message);
          }else{
             res.status(200).jsonp(owner);
-         }
-      })
-   })
+         };
+      });
+   });
+}
+
+//UPDATE OWNER
+exports.update = function(req, res){
+   console.log('Update owner');
+   Owner.find(req.params.id, function(err, owner){
+      if(err){
+         console.log('erro al actualizar dueño');
+         res.status(500, err.message);
+      }else{
+         owner.nombre = req.body.nombre;
+         owner.apellido = req.body.apellido;
+         owner.dni = req.body.dni;
+         owner.save(function(err, owner){
+            if(err){
+               console.log('error guardando actualizacion de dueño');
+               res.status(500, err.message);
+            }else{
+               res.status(200).jsonp(owner);
+            }
+         });
+      };
+   });
+}
+
+//DELETE OWNER
+exports.delete = function(req, res){
+   Owner.findById(req.params.id, function(err, owner){
+      owner.remove(function(err){
+         if(err){
+            console.log('Error removiendo dueño');
+            res.status(500, err.message);
+         }else{
+            res.status(200).jsonp({message: 'dueño borrado'});
+         };
+      });
+   });
 }

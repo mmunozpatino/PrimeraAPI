@@ -28,6 +28,10 @@ app.route('/owner')
    .post(ownerCtrl.addNew)
    .get(ownerCtrl.getAll);
 
+app.route('/owner/:id')
+   .put(ownerCtrl.update)
+   .delete(ownerCtrl.delete);
+
 app.route('/owner.addpet/:id')
    .post(ownerCtrl.addPet);
 //conexion a mongo

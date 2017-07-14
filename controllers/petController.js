@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Pet = require('../models/pet');
 
 //POSTNEW
+
 exports.addNew = function(req, res){
    console.log('NEW PET');
    var pet = new Pet({
@@ -14,6 +15,7 @@ exports.addNew = function(req, res){
       res.status(200).jsonp(pet);
    })
 }
+
 
 //GETALL
 exports.getAll = function(req, res){
