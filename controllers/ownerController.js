@@ -62,7 +62,20 @@ exports.deletePet = function(req,res){
       if(err){
          console.log('error buscando dueño');
       }else{
-         owner.mascotas.id(req.params.idp).remove();
+         /*
+         console.log(owner);
+         console.log(owner.mascotas.id(req.params.idp));
+         */
+        owner.mascotas.id(req.params.idp).remove();
+        owner.save(function(err){
+         if(err){
+            return handleError(err);
+         }else{
+            console.log('la mascota fue borrada!');
+         }
+        })
+        res.status(200).jsonp({message: 'mascota borrada'});
+
       }
    })
 }
