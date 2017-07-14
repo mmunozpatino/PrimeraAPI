@@ -25,7 +25,11 @@ app.route('/pet/:id')
    .delete(petCtrl.delete);
 
 app.route('/owner')
-   .post(ownerCtrl.addNew);
+   .post(ownerCtrl.addNew)
+   .get(ownerCtrl.getAll);
+
+app.route('/owner.addpet/:id')
+   .post(ownerCtrl.addPet);
 //conexion a mongo
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/mascotas', { useMongoClient: true }, function(err, res){
